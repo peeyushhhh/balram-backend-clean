@@ -1,0 +1,169 @@
+[
+  {
+    "id": "shop1",
+    "name": "Fashion Hub - Clothing Store",
+    "category": "Clothing & Apparel",
+    "location": "Balram Complex - Ground Floor, Shop No. 1",
+    "price": 15000,
+    "area": "800 sq ft",
+    "description": "Spacious clothing store perfect for fashion retail. High foot traffic location with excellent visibility.",
+    "images": [
+      {
+        "url": "https://picsum.photos/640/480?random=1",
+        "altText": "Fashion Hub clothing store front view",
+        "caption": "Modern storefront with large display windows"
+      },
+      {
+        "url": "https://picsum.photos/640/480?random=2",
+        "altText": "Interior view of Fashion Hub clothing store",
+        "caption": "Spacious interior with organized displays"
+      }
+    ],
+    "seoTitle": "Fashion Clothing Store for Rent - Balram Complex",
+    "seoDescription": "Premium clothing store space at Balram Complex. 800 sq ft, ground floor location.",
+    "canonicalUrl": "https://balramcomplex.com/shops/fashion-hub",
+    "slug": "fashion-hub-clothing-store",
+    "keywords": [
+      "clothing store",
+      "fashion retail",
+      "shop for rent"
+    ],
+    "amenities": [
+      "Air Conditioning",
+      "Security System",
+      "Parking",
+      "Storage"
+    ],
+    "status": "available",
+    "featured": true,
+    "createdAt": "2025-09-01T10:00:00Z",
+    "updatedAt": "2025-09-09T11:30:00Z"
+  },
+  {
+    "id": "shop2",
+    "name": "Tech Zone - Electronics Store",
+    "category": "Electronics",
+    "location": "Balram Complex - First Floor, Shop No. 2",
+    "price": 18000,
+    "area": "600 sq ft",
+    "description": "Modern electronics store with excellent electrical infrastructure for gadgets and mobile phones.",
+    "images": [
+      {
+        "url": "https://picsum.photos/640/480?random=3",
+        "altText": "Tech Zone electronics store exterior",
+        "caption": "Modern electronics store with LED signage"
+      },
+      {
+        "url": "https://picsum.photos/640/480?random=4",
+        "altText": "Tech Zone interior with product displays",
+        "caption": "Well-organized electronics displays"
+      }
+    ],
+    "seoTitle": "Electronics Store for Rent - Balram Complex",
+    "seoDescription": "Premium electronics retail space. 600 sq ft with advanced electrical setup.",
+    "canonicalUrl": "https://balramcomplex.com/shops/tech-zone",
+    "slug": "tech-zone-electronics-store",
+    "keywords": [
+      "electronics store",
+      "mobile shop",
+      "gadgets"
+    ],
+    "amenities": [
+      "High-Speed Internet",
+      "Security",
+      "AC",
+      "Power Backup"
+    ],
+    "status": "available",
+    "featured": false,
+    "createdAt": "2025-09-01T10:15:00Z",
+    "updatedAt": "2025-09-09T11:30:00Z"
+  },
+  {
+    "id": "shop3",
+    "name": "Delicious Bites - Food Court",
+    "category": "Food & Beverage",
+    "location": "Balram Complex - Ground Floor, Shop No. 3",
+    "price": 25000,
+    "area": "1200 sq ft",
+    "description": "Premium food court space with commercial kitchen and seating for 40 customers.",
+    "images": [
+      {
+        "url": "https://picsum.photos/640/480?random=5",
+        "altText": "Delicious Bites food court entrance",
+        "caption": "Spacious food court with modern seating"
+      },
+      {
+        "url": "https://picsum.photos/640/480?random=6",
+        "altText": "Commercial kitchen setup",
+        "caption": "Fully equipped commercial kitchen"
+      }
+    ],
+    "seoTitle": "Food Court Space for Rent - Balram Complex",
+    "seoDescription": "Premium food court with commercial kitchen, seating area included.",
+    "canonicalUrl": "https://balramcomplex.com/shops/delicious-bites",
+    "slug": "delicious-bites-food-court",
+    "keywords": [
+      "food court",
+      "restaurant space",
+      "commercial kitchen"
+    ],
+    "amenities": [
+      "Commercial Kitchen",
+      "Seating Area",
+      "Exhaust",
+      "Gas Pipeline"
+    ],
+    "status": "available",
+    "featured": true,
+    "createdAt": "2025-09-01T10:30:00Z",
+    "updatedAt": "2025-09-09T11:30:00Z"
+  },
+  {
+    "id": "shop4",
+    "name": "Test Bookstore - Books & Stationery",
+    "category": "Books & Education",
+    "location": "Balram Complex - Second Floor, Shop No. 11",
+    "price": 12000,
+    "area": "400 sq ft",
+    "description": "Cozy bookstore with wide collection of books and stationery items for students and book lovers",
+    "seoTitle": "Books & Stationery Store for Rent - Balram Complex Second Fl",
+    "seoDescription": "Cozy bookstore space available for rent at Balram Complex. 400 sq ft with reading area, perfect for books and stationery business",
+    "canonicalUrl": "https://balramcomplex.com/shops/test-bookstore",
+    "keywords": [
+      "bookstore",
+      "books",
+      "stationery",
+      "education",
+      "reading",
+      "balram complex"
+    ],
+    "amenities": [
+      "Reading Area",
+      "Wi-Fi",
+      "Air Conditioning",
+      "Study Space"
+    ],
+    "status": "available",
+    "images": [
+      {
+        "url": "https://picsum.photos/640/480?random=21",
+        "altText": "Test bookstore exterior with attractive book display window",
+        "caption": "Welcoming storefront of the bookstore"
+      },
+      {
+        "url": "https://picsum.photos/640/480?random=22",
+        "altText": "Interior view of bookstore with organized bookshelves",
+        "caption": "Well-organized book sections and reading area"
+      }
+    ],
+    "slug": "test-bookstore---books--stationery",
+    "createdAt": "2025-09-09T20:27:33.746Z",
+    "updatedAt": "2025-09-09T20:27:33.746Z"
+  },
+  {
+    "id": "shop5",
+    "createdAt": "2025-09-11T12:08:48.334Z",
+    "updatedAt": "2025-09-11T12:08:48.334Z"
+  }
+]
