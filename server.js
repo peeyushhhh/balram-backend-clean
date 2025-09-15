@@ -28,14 +28,19 @@ connectDB();
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com', 'https://balramcomplex.com']
+    ? [
+        'https://balram-complex-frontend.vercel.app',  // ✅ Your Vercel domain
+        'https://balramcomplex.com'                    // ✅ Future custom domain
+      ]
     : [
         'http://localhost:5173',    // React dashboard
         'http://127.0.0.1:5500',    // VS Code Live Server
         'http://localhost:5500',    // Alternative port
         'http://localhost:3000'     // Just in case
       ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -104,6 +109,7 @@ app.use((req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 3000;
+// Force rebuild for Railway - Sept 15
 
 
 console.log(`⏳ Starting server on port ${PORT}...`);
