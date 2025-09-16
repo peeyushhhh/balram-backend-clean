@@ -1,29 +1,29 @@
-// GET /api/shops/:id - Get shop by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(`🔍 GET /api/shops/${id} - Fetching shop by ID`);
-    
-    // ✅ FIXED - Use MongoDB _id instead of custom id field
-    const shop = await Shop.findById(id);
-    
-    if (!shop) {
-      return res.status(404).json({
-        success: false,
-        message: 'Shop not found'
-      });
-    }
-    
-    res.json({
-      success: true,
-      message: 'Shop fetched successfully',
-      data: shop
-    });
-  } catch (error) {
-    console.error('❌ Error fetching shop:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error fetching shop'
-    });
-  }
+const mongoose = require('mongoose');
+
+const shopSchema = new mongoose.Schema({
+  id: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  category: String,
+  location: String,
+  area: String,
+  price: Number,
+  status: { type: String, default: 'available' },
+  description: String,
+  amenities: [String],
+  seoTitle: String,
+  seoDescription: String,
+  keywords: [String],
+  canonicalUrl: String,
+  slug: String,
+  featured: { type: Boolean, default: false },
+  images: [{
+    url: String,
+    altText: String,
+    caption: String
+  }]
+}, {
+  timestamps: true,
+  collection: 'properties' // ✅ CRITICAL FIX - Use properties collection
 });
+
+module.exports = mongoose.model('Shop', shopSchema);
