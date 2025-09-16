@@ -1,125 +1,125 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
-
-// Path to shops data file
-const shopsFilePath = path.join(__dirname, '../shops.json');
-
-// Helper function to read shops data
-function getShopsData() {
-  try {
-    const data = fs.readFileSync(shopsFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('❌ Error reading shops data:', error);
-    return [];
-  }
-}
-
-// Helper function to save shops data  
-function saveShopsData(shops) {
-  try {
-    fs.writeFileSync(shopsFilePath, JSON.stringify(shops, null, 2));
-    return true;
-  } catch (error) {
-    console.error('❌ Error saving shops data:', error);
-    return false;
-  }
-}
+const Shop = require('../models/Shop');
 
 // GET /api/shops - Get all shops
-router.get('/', (req, res) => {
-  console.log('📋 GET /api/shops - Fetching all shops');
-  
-  const shops = getShopsData();
-  
-  res.json({
-    success: true,
-    count: shops.length,
-    message: 'Shops fetched successfully',
-    data: shops
-  });
+router.get('/', async (req, res) => {
+  try {
+    console.log('📋 GET /api/shops - Fetching all shops');
+    
+    const shops = await Shop.find({});
+    
+    res.json({
+      success: true,
+      count: shops.length,
+      message: 'Shops fetched successfully',
+      data: shops
+    });
+  } catch (error) {
+    console.error('❌ Error fetching shops:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching shops',
+      error: error.message
+    });
+  }
 });
 
 // GET /api/shops/:id - Get shop by ID
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  console.log(`🔍 GET /api/shops/${id} - Fetching shop by ID`);
-  
-  const shops = getShopsData();
-  const shop = shops.find(shop => shop.id === id);
-  
-  if (!shop) {
-    return res.status(404).json({
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`🔍 GET /api/shops/${id} - Fetching shop by ID`);
+    
+    const shop = await Shop.findOne({ id: id });
+    
+    if (!shop) {
+      return res.status(404).json({
+        success: false,
+        message: 'Shop not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Shop fetched successfully',
+      data: shop
+    });
+  } catch (error) {
+    console.error('❌ Error fetching shop:', error);
+    res.status(500).json({
       success: false,
-      message: 'Shop not found'
+      message: 'Error fetching shop'
     });
   }
-  
-  res.json({
-    success: true,
-    message: 'Shop fetched successfully',
-    data: shop
-  });
 });
 
 // POST /api/shops - Add new shop
-router.post('/', (req, res) => {
-  console.log('➕ POST /api/shops - Adding new shop');
-  
-  const shops = getShopsData();
-  const newShop = {
-    id: `shop${shops.length + 1}`,
-    ...req.body,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-  
-  shops.push(newShop);
-  
-  if (saveShopsData(shops)) {
+router.post('/', async (req, res) => {
+  try {
+    console.log('➕ POST /api/shops - Adding new shop');
+    console.log('📝 Request body:', req.body);
+    
+    // ✅ Generate slug from name
+    const generateSlug = (name) => {
+      return name.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    };
+    
+    const newShop = new Shop({
+      id: `shop${Date.now()}`,
+      ...req.body,
+      slug: generateSlug(req.body.name), // ✅ Generate slug
+      featured: false, // ✅ Default value
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    });
+    
+    const savedShop = await newShop.save();
+    console.log('✅ Shop saved successfully:', savedShop.id);
+    
     res.status(201).json({
       success: true,
       message: 'Shop added successfully',
-      data: newShop
+      data: savedShop
     });
-  } else {
+  } catch (error) {
+    console.error('❌ Error saving shop:', error);
     res.status(500).json({
       success: false,
-      message: 'Error saving shop'
+      message: 'Error saving shop',
+      error: error.message
     });
   }
 });
 
 // PUT /api/shops/:id - Update shop
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
-  console.log(`✏️ PUT /api/shops/${id} - Updating shop`);
-  
-  const shops = getShopsData();
-  const shopIndex = shops.findIndex(shop => shop.id === id);
-  
-  if (shopIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      message: 'Shop not found'
-    });
-  }
-  
-  shops[shopIndex] = {
-    ...shops[shopIndex],
-    ...req.body,
-    updatedAt: new Date().toISOString()
-  };
-  
-  if (saveShopsData(shops)) {
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`✏️ PUT /api/shops/${id} - Updating shop`);
+    
+    const updatedShop = await Shop.findOneAndUpdate(
+      { id: id },
+      { ...req.body, updatedAt: new Date().toISOString() },
+      { new: true }
+    );
+    
+    if (!updatedShop) {
+      return res.status(404).json({
+        success: false,
+        message: 'Shop not found'
+      });
+    }
+    
     res.json({
       success: true,
       message: 'Shop updated successfully',
-      data: shops[shopIndex]
+      data: updatedShop
     });
-  } else {
+  } catch (error) {
+    console.error('❌ Error updating shop:', error);
     res.status(500).json({
       success: false,
       message: 'Error updating shop'
@@ -128,51 +128,31 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE /api/shops/:id - Delete shop
-router.delete('/:id', (req, res) => {
-  const { id } = req.params;
-  console.log(`🗑️ DELETE /api/shops/${id} - Deleting shop`);
-  
-  const shops = getShopsData();
-  const shopIndex = shops.findIndex(shop => shop.id === id);
-  
-  if (shopIndex === -1) {
-    return res.status(404).json({
-      success: false,
-      message: 'Shop not found'
-    });
-  }
-  
-  shops.splice(shopIndex, 1);
-  
-  if (saveShopsData(shops)) {
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`🗑️ DELETE /api/shops/${id} - Deleting shop`);
+    
+    const deletedShop = await Shop.findOneAndDelete({ id: id });
+    
+    if (!deletedShop) {
+      return res.status(404).json({
+        success: false,
+        message: 'Shop not found'
+      });
+    }
+    
     res.json({
       success: true,
       message: 'Shop deleted successfully'
     });
-  } else {
+  } catch (error) {
+    console.error('❌ Error deleting shop:', error);
     res.status(500).json({
       success: false,
       message: 'Error deleting shop'
     });
   }
-});
-
-// GET /api/shops/search/:category - Get shops by category
-router.get('/search/:category', (req, res) => {
-  const { category } = req.params;
-  console.log(`🔎 GET /api/shops/search/${category} - Searching shops by category`);
-  
-  const shops = getShopsData();
-  const filteredShops = shops.filter(shop => 
-    shop.category.toLowerCase().includes(category.toLowerCase())
-  );
-  
-  res.json({
-    success: true,
-    count: filteredShops.length,
-    message: `Shops found for category: ${category}`,
-    data: filteredShops
-  });
 });
 
 module.exports = router;
