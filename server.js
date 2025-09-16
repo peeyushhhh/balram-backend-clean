@@ -29,8 +29,10 @@ connectDB();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [
-        'https://balram-complex-frontend.vercel.app',  // ✅ Your Vercel domain
-        'https://balramcomplex.com'                    // ✅ Future custom domain
+        'https://balram-complex-frontend.vercel.app',  // Your Vercel dashboard
+        'https://balramcomplex.com',                   // Your live website
+        'http://127.0.0.1:5500',                      // VS Code Live Server
+        'http://localhost:5500'                       // Alternative
       ]
     : [
         'http://localhost:5173',    // React dashboard

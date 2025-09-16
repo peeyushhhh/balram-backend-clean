@@ -1,13 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const Property = require('../models/Property'); 
+import { Router } from 'express';
+const router = Router();
+import Property, { find, findById, findByIdAndUpdate, findByIdAndDelete } from '../models/property'; 
 
 // GET all properties
 router.get('/', async (req, res) => {
   console.log('🏠 GET /api/properties called');
   try {
     // Remove .populate() since createdBy might not exist for all records
-    const properties = await Property.find()
+    const properties = await find()
       .sort({ createdAt: -1 });
     
     console.log(`Found ${properties.length} properties`);
@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   console.log(`🏠 GET /api/properties/${req.params.id} called`);
   try {
-    const property = await Property.findById(req.params.id);
+    const property = await findById(req.params.id);
     
     if (!property) {
       return res.status(404).json({
@@ -87,7 +87,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   console.log(`🏠 PUT /api/properties/${req.params.id} called`);
   try {
-    const updatedProperty = await Property.findByIdAndUpdate(
+    const updatedProperty = await findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
@@ -119,7 +119,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   console.log(`🏠 DELETE /api/properties/${req.params.id} called`);
   try {
-    const deletedProperty = await Property.findByIdAndDelete(req.params.id);
+    const deletedProperty = await findByIdAndDelete(req.params.id);
     
     if (!deletedProperty) {
       return res.status(404).json({
@@ -142,4 +142,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
