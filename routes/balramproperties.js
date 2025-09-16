@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const Property = require('../models/property');
+const Property = require('../models/Property');
 
 // GET all properties
 router.get('/', async (req, res) => {
