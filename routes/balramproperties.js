@@ -1,4 +1,4 @@
-import { Router } from 'express';
+const { Router } = require('express');
 const router = Router();
 import Property, { find, findById, findByIdAndUpdate, findByIdAndDelete } from '../models/property'; 
 
