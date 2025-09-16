@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-import Property, { find, findById, findByIdAndUpdate, findByIdAndDelete } from '../models/property'; 
+const Property = require('../models/property');
 
 // GET all properties
 router.get('/', async (req, res) => {
