@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const telemetrySchema = new mongoose.Schema({
+const telemetrySchema = new Schema({
   event_type: {
     type: String,
     required: true,
@@ -14,7 +14,7 @@ const telemetrySchema = new mongoose.Schema({
   session_id: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
   page_url: String,
-  data: mongoose.Schema.Types.Mixed,
+  data: Schema.Types.Mixed,
   user_agent: String,
   ip_address: String
 }, {
@@ -25,4 +25,4 @@ const telemetrySchema = new mongoose.Schema({
 telemetrySchema.index({ event_type: 1, timestamp: -1 });
 telemetrySchema.index({ session_id: 1 });
 
-module.exports = mongoose.model('Telemetry', telemetrySchema);
+export default model('Telemetry', telemetrySchema);
