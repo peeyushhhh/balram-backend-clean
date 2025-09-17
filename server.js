@@ -29,16 +29,25 @@ connectDB();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [
-        'https://balram-complex-frontend.vercel.app',  // Your Vercel dashboard
-        'https://balramcomplex.com',                   // Your live website
-        'http://127.0.0.1:5500',                      // VS Code Live Server
-        'http://localhost:5500'                       // Alternative
+        'https://balram-complex-frontend.vercel.app',
+        'https://balramcomplex.com',
+        'https://www.balramcomplex.com',
+        'http://127.0.0.1:5500',
+        'http://localhost:5500',
+        'http://127.0.0.1:5501',      // 🔥 ADD THESE
+        'http://localhost:5501',      // 🔥 ADD THESE
+        'http://127.0.0.1:8080',      // 🔥 ADD THESE
+        'http://localhost:8080'       // 🔥 ADD THESE
       ]
     : [
-        'http://localhost:5173',    // React dashboard
-        'http://127.0.0.1:5500',    // VS Code Live Server
-        'http://localhost:5500',    // Alternative port
-        'http://localhost:3000'     // Just in case
+        'http://localhost:5173',
+        'http://127.0.0.1:5500',
+        'http://localhost:5500',
+        'http://127.0.0.1:5501',      // 🔥 ADD THESE
+        'http://localhost:5501',      // 🔥 ADD THESE
+        'http://127.0.0.1:8080',      // 🔥 ADD THESE
+        'http://localhost:8080',      // 🔥 ADD THESE
+        'http://localhost:3000'
       ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
